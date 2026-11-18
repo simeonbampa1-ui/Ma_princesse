@@ -1,0 +1,497 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* =========================
+   CONFIGURATION GENERALE
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --purple: #a855f7;
+    --pink: #f472d0;
+    --light: #f8eaff;
+    --background: #080419;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: var(--background);
+    color: white;
+    overflow: hidden;
+}
+
+/* =========================
+   CIEL ETOILE
+========================= */
+
+.night-sky {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+
+    background:
+        radial-gradient(ellipse at 50% 45%,
+            #32145b 0%,
+            #190b35 42%,
+            #080419 100%);
+}
+
+.stars {
+    position: absolute;
+    inset: -50%;
+    background-image:
+        radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 30% 70%, #e6b8ff, transparent),
+        radial-gradient(2px 2px at 60% 40%, #fff, transparent),
+        radial-gradient(2px 2px at 80% 15%, #ffb5f5, transparent),
+        radial-gradient(2px 2px at 90% 80%, #fff, transparent),
+        radial-gradient(3px 3px at 45% 55%, #d9a4ff, transparent);
+
+    background-size: 300px 300px;
+    animation: starsMove 80s linear infinite,
+               twinkle 3s ease-in-out infinite alternate;
+}
+
+.stars-two {
+    background-size: 190px 190px;
+    opacity: 0.45;
+    animation-duration: 120s, 5s;
+    animation-direction: reverse, alternate;
+}
+
+@keyframes starsMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(300px); }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* LUNE */
+
+.moon {
+    position: absolute;
+    top: 8%;
+    right: 12%;
+
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+
+    background: #f5e4ff;
+
+    box-shadow:
+        0 0 20px #e8b7ff,
+        0 0 50px #a855f7,
+        0 0 100px #7e22ce;
+
+    opacity: 0.85;
+}
+
+/* =========================
+   COEURS FLOTTANTS
+========================= */
+
+.floating-hearts {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -40px;
+    color: #e879f9;
+    opacity: 0;
+    animation: floatHeart linear forwards;
+    text-shadow: 0 0 15px #d946ef;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.7);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    85% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(35deg) scale(1.3);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   CONTENEUR ET ECRANS
+========================= */
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.screen {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    padding: 35px 22px;
+
+    text-align: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(25px) scale(0.97);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        visibility 0.8s;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* =========================
+   CONTENU
+========================= */
+
+.content {
+    width: 100%;
+    max-width: 520px;
+    animation: contentAppear 1s ease;
+}
+
+@keyframes contentAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.crown {
+    font-size: 55px;
+    color: #f5c9ff;
+    text-shadow: 0 0 25px #d946ef;
+    margin-bottom: 18px;
+}
+
+.subtitle {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #d8b4fe;
+    margin-bottom: 22px;
+    font-weight: 500;
+}
+
+h1, h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(48px, 10vw, 76px);
+    line-height: 1.05;
+    color: #fff0ff;
+
+    text-shadow:
+        0 0 15px #d946ef,
+        0 0 35px #9333ea;
+}
+
+h1 span, h2 span {
+    color: #f0abfc;
+    font-style: italic;
+}
+
+.separator {
+    margin: 28px 0;
+    color: #e9a8ff;
+    font-size: 19px;
+    letter-spacing: 9px;
+}
+
+.message {
+    max-width: 440px;
+    margin: 0 auto 35px;
+
+    font-size: 15px;
+    line-height: 2;
+
+    color: #e9d5ff;
+    font-weight: 300;
+}
+
+/* =========================
+   COEURS DECORATIFS
+========================= */
+
+.heart-icon {
+    color: #f472d0;
+    font-size: 60px;
+    margin-bottom: 18px;
+    animation: heartbeat 1.6s infinite;
+    text-shadow: 0 0 25px #ec4899;
+}
+
+.final-heart {
+    color: #f472d0;
+    font-size: 65px;
+    margin-bottom: 15px;
+    animation: heartbeat 1.2s infinite;
+    text-shadow: 0 0 30px #ec4899;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.18);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.12);
+    }
+}
+
+/* =========================
+   BOUTONS
+========================= */
+
+button {
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+.next-btn {
+    border: 1px solid #e9a8ff;
+    border-radius: 50px;
+
+    padding: 15px 27px;
+
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+
+    background: linear-gradient(120deg, #9333ea, #db4bc5);
+
+    box-shadow:
+        0 0 15px #a855f780,
+        0 0 35px #c026d340;
+
+    transition: 0.35s ease;
+}
+
+.next-btn span {
+    margin-left: 8px;
+}
+
+.next-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 30px #e879f9;
+}
+
+.restart-btn {
+    display: block;
+    margin: 28px auto 0;
+
+    background: transparent;
+    border: 1px solid #c084fc;
+    border-radius: 30px;
+
+    padding: 10px 20px;
+
+    color: #e9d5ff;
+    font-size: 12px;
+
+    transition: 0.3s;
+}
+
+.restart-btn:hover {
+    background: #9333ea;
+    box-shadow: 0 0 20px #a855f7;
+}
+
+/* =========================
+   SIGNATURE
+========================= */
+
+.love-note {
+    font-size: 14px;
+    color: #d8b4fe;
+    margin-top: 10px;
+}
+
+.signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 45px;
+    font-style: italic;
+    color: #f5d0fe;
+
+    margin-top: 10px;
+
+    text-shadow: 0 0 20px #d946ef;
+}
+
+.signature span {
+    color: #f472d0;
+}
+
+/* =========================
+   BAS DE PAGE
+========================= */
+
+.bottom-note {
+    margin-top: 45px;
+    font-size: 11px;
+    color: #a78bca;
+    letter-spacing: 1px;
+}
+
+/* =========================
+   INDICATEURS
+========================= */
+
+.page-indicator {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #74528c;
+    transition: 0.4s;
+}
+
+.active-dot {
+    width: 23px;
+    border-radius: 10px;
+    background: #e879f9;
+    box-shadow: 0 0 12px #e879f9;
+}
+
+/* =========================
+   RESPONSIVE MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .screen {
+        padding: 25px 24px 60px;
+    }
+
+    .moon {
+        width: 48px;
+        height: 48px;
+        top: 7%;
+        right: 9%;
+    }
+
+    .subtitle {
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+
+    h1, h2 {
+        font-size: clamp(48px, 13vw, 65px);
+    }
+
+    .message {
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+    .separator {
+        margin: 22px 0;
+    }
+
+    .next-btn {
+        padding: 14px 22px;
+        font-size: 12px;
+    }
+
+    .crown {
+        font-size: 45px;
+    }
+
+    .bottom-note {
+        margin-top: 35px;
+    }
+
+    .signature {
+        font-size: 40px;
+    }
+
+    .final-content .message {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-height: 650px) {
+    .screen {
+        padding-top: 12px;
+        padding-bottom: 48px;
+    }
+
+    .crown, .heart-icon, .final-heart {
+        font-size: 38px;
+        margin-bottom: 8px;
+    }
+
+    .subtitle {
+        margin-bottom: 12px;
+    }
+
+    .separator {
+        margin: 14px 0;
+    }
+
+    .message {
+        margin-bottom: 18px;
+        line-height: 1.6;
+    }
+
+    .bottom-note {
+        margin-top: 20px;
+    }
+}
